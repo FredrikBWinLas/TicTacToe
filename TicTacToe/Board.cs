@@ -1,24 +1,20 @@
 ﻿
 namespace TicTacToe;
-public class Board
+public class Board : IBoard
 {
-    public string BoardData { get; set; } = "";
+    private readonly char[] _boardData = new char[9];
 
-    public void Init()
-    {
-        BoardData = new string(' ', 9);
-    }
-    public char Get(int index)
-    {
-        return BoardData[index];
-    }
+    public void Init() => Array.Fill(_boardData, ' ');
+    public char Get(int index) => _boardData[index];
     public void Set(int index, char player)
     {
-        if (player != 'X' && player != 'O')
+        if (player != 'X' && player != 'O' && player != ' ')
             throw new ArgumentException("Wrong character type. Valid characters are 'X' or 'O'.");
 
-        var boardArray = BoardData.ToCharArray();
-        boardArray[index] = player;
-        BoardData = new string(boardArray);
+        _boardData[index] = player;
     }
+
+    public override string ToString() => new string(_boardData);
+
+    public bool IsEmpty(int index) => Get(index) == ' ';
 }

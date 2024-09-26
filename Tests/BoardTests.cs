@@ -15,7 +15,7 @@ public class BoardTests
         cut.Init();
 
         //Assert
-        cut.BoardData.Should().Be("         ");
+        cut.ToString().Should().Be("         ");
     }
 
     [Fact]
@@ -23,14 +23,15 @@ public class BoardTests
     {
         //Arrange
         var cut = new Board();
-        cut.BoardData = "   X  O  ";
+        cut.Init();
+        cut.Set(4, 'X');
 
         //Act
         cut.Init();
 
         //Assert
         var result = cut.ToString();
-        cut.BoardData.Should().Be("         ");
+        cut.ToString().Should().Be("         ");
     }
 
     [Theory]
@@ -40,7 +41,11 @@ public class BoardTests
     {
         //Arrange
         var cut = new Board();
-        cut.BoardData = boardData;
+        cut.Init();
+        for (int i = 0; i < boardData.Length; i++)
+        {
+            cut.Set(i, boardData[i]);
+        }
 
         //Act
         var result = cut.Get(index);
@@ -56,7 +61,10 @@ public class BoardTests
     {
         //Arrange
         var cut = new Board();
-        cut.BoardData = boardData;
+        for (int i = 0; i < boardData.Length; i++)
+        {
+            cut.Set(i, boardData[i]);
+        }
 
         //Act
         Action act = () => cut.Get(index);
@@ -111,4 +119,25 @@ public class BoardTests
         //Assert
         act.Should().Throw<IndexOutOfRangeException>();
     }
+
+    [Theory]
+    [InlineData(" X O  X  ", 0)]
+    [InlineData(" X O  X  ", 2)]
+    public void IsEmpty_WhenEmpty_ShouldGiveTrue(string boardData, int index)
+    {
+        //Arrange
+        var cut = new Board();
+        cut.Init();
+        for (int i = 0; i < boardData.Length; i++)
+        {
+            cut.Set(i, boardData[i]);
+        }
+
+        //Act
+        var result = cut.IsEmpty(index);
+
+        //Assert
+        result.Should().BeTrue();
+    }
+
 }
