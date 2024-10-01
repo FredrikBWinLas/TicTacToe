@@ -14,7 +14,7 @@ public class Game
     public void Move(int index)
     {
         if (!Board.IsEmpty(index))
-            throw new ArgumentException();
+            throw new ArgumentException("Bad Move.");
 
         Board.Set(index, CurrentPlayer);
         ChangePlayer();

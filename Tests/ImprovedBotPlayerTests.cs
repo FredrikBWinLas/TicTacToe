@@ -6,7 +6,7 @@ namespace Tests;
 public class ImprovedBotPlayerTests
 {
     [Fact]
-    public void GetNextMove_WhenEmptyMiddleSpot_SouldGive4()
+    public void GetNextMove_WhenEmptyMiddleSpot_ShouldGive4()
     {
         //Arrange
         var board = new Board();

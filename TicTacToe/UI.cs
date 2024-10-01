@@ -49,5 +49,5 @@ public class UI
         Print(GetBoardPadding() + $"|  {cell1}  |  {cell2}  |  {cell3}  |\n");
     }
 
-    private string GetBoardPadding() => new(' ', 18);
+    private static string GetBoardPadding() => new(' ', 18);
 }

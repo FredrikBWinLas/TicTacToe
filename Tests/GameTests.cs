@@ -32,7 +32,7 @@ public class GameTests
     }
 
     [Fact]
-    public void Move_WhenCorrectMove_ShoulUpdateBoard()
+    public void Move_WhenCorrectMove_ShouldUpdateBoard()
     {
         //Arrange
         var sut = new Game();
@@ -45,7 +45,7 @@ public class GameTests
         sut.Board.ToString().Should().Be("    X    ");
     }
     [Fact]
-    public void Move_WhenCorrectMove_ShoulChangePlayer()
+    public void Move_WhenCorrectMove_ShouldChangePlayer()
     {
         //Arrange
         var sut = new Game();
@@ -59,7 +59,7 @@ public class GameTests
         sut.Board.ToString().Should().Be("O   X    ");
     }
     [Fact]
-    public void Move_WhenNotEmpty_ShoulGiveError()
+    public void Move_WhenNotEmpty_ShouldGiveError()
     {
         //Arrange
         var sut = new Game();

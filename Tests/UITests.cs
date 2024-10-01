@@ -10,7 +10,7 @@ namespace Tests;
 public class UITests
 {
     [Fact]
-    public void Print_SholdRenderMessage()
+    public void Print_ShouldRenderMessage()
     {
         //Arrange
         var writeOutputMock = Substitute.For<WriteOutputDelegate>();

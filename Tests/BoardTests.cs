@@ -30,7 +30,6 @@ public class BoardTests
         cut.Init();
 
         //Assert
-        var result = cut.ToString();
         cut.ToString().Should().Be("         ");
     }
 

@@ -11,7 +11,7 @@ namespace Tests;
 public class BotPlayerTests
 {
     [Fact]
-    public void GetNextMove_WhenEmptyBoard_SouldGiveANumberInRange0To8()
+    public void GetNextMove_WhenEmptyBoard_ShouldGiveANumberInRange0To8()
     {
         //Arrange
         var board = new Board();
@@ -26,7 +26,7 @@ public class BotPlayerTests
     }
 
     [Fact]
-    public void GetNextMove_WhenOneEmptyBoard_SouldGiveIndexOfTheEmptySpot()
+    public void GetNextMove_WhenOneEmptyBoard_ShouldGiveIndexOfTheEmptySpot()
     {
         //Arrange
         var board = new Board();
@@ -45,7 +45,7 @@ public class BotPlayerTests
     }
 
     [Fact]
-    public void GetNextMove_WhenBoardIsFull_SouldGiveMinusOne()
+    public void GetNextMove_WhenBoardIsFull_ShouldGiveMinusOne()
     {
         //Arrange
         var board = new Board();
@@ -76,7 +76,7 @@ public class BotPlayerTests
     [InlineData("  X X X  ")]
 
     [InlineData("OOO      ")]
-    public void GetNextMove_WhenMove_SouldGiveANumberOnEmptySpot(string boardData)
+    public void GetNextMove_WhenMove_ShouldGiveANumberOnEmptySpot(string boardData)
     {
         //Arrange
         var board = new Board();
