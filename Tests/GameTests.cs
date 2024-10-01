@@ -73,99 +73,6 @@ public class GameTests
         act.Should().Throw<ArgumentException>();
     }
 
-    [Fact]
-    public void IsBoardFull_WhenBoardIsNotFull_ShoulGiveFalse()
-    {
-        //Arrange
-        var sut = new Game();
-        sut.NewGame();
-        sut.Move(0);
-
-        //Act
-        var result = sut.IsBoardFull();
-
-        //Assert
-        result.Should().BeFalse();
-    }
-    [Fact]
-    public void IsBoardFull_WhenBoardIsFull_ShoulGiveTrue()
-    {
-        //Arrange
-        var sut = new Game();
-        sut.NewGame();
-        for(var i=0; i<9; i++)
-            sut.Board.Set(i, 'X');
-
-        //Act
-        var result = sut.IsBoardFull();
-
-        //Assert
-        result.Should().BeTrue();
-    }
-
-    [Theory]
-    [InlineData("XXX      ", 'X')]
-    [InlineData("   XXX   ", 'X')]
-    [InlineData("      XXX", 'X')]
-
-    [InlineData("X  X  X  ", 'X')]
-    [InlineData(" X  X  X ", 'X')]
-    [InlineData("  X  X  X", 'X')]
-
-    [InlineData("X   X   X", 'X')]
-    [InlineData("  X X X  ", 'X')]
-
-    [InlineData("OOO      ", 'O')]
-    public void HasPlayerWon_WhenWon_ShouldGiveTrue(string boardData, char player)
-    {
-        //Arrange
-        var sut = new Game();
-        sut.NewGame();
-        for (int i = 0; i < boardData.Length; i++)
-        {
-            sut.Board.Set(i, boardData[i]);
-        }
-
-        //Act
-        var result = sut.HasPlayerWon(player);
-
-        //Assert
-        result.Should().BeTrue();
-    }
-
-    [Theory]
-    [InlineData("XX       ", 'X')]
-    [InlineData("   XX    ", 'X')]
-    [InlineData("      XX ", 'X')]
-
-    [InlineData("X  X     ", 'X')]
-    [InlineData(" X  X    ", 'X')]
-    [InlineData("  X  X   ", 'X')]
-
-    [InlineData("X   X    ", 'X')]
-    [InlineData("  X X    ", 'X')]
-
-    [InlineData("XOXOXOXOX", 'O')]
-    [InlineData("OXOXOXOXO", 'X')]
-
-    [InlineData("OXXOOXXOX", 'O')]
-    [InlineData("OXOXOX X ", 'O')]
-    public void HasPlayerWon_WhenNoWins_ShouldGiveFalse(string boardData, char player)
-    {
-        // Arrange
-        var sut = new Game();
-        sut.NewGame();
-        for (int i = 0; i < boardData.Length; i++)
-        {
-            sut.Board.Set(i, boardData[i]);
-        }
-
-        // Act
-        var result = sut.HasPlayerWon(player);
-
-        // Assert
-        result.Should().BeFalse();
-    }
     [Theory]
     [InlineData("XXX      ")]
     [InlineData("   XXX   ")]
@@ -182,7 +89,7 @@ public class GameTests
     public void HasAnyPlayerWon_WhenWon_ShouldGiveTrue(string boardData)
     {
         //Arrange
-        var sut = new Game();
+        var sut = new Game{Board = new Board() { AllowedCharacters = ['X', 'O', ' '] } };
         sut.NewGame();
         for (int i = 0; i < boardData.Length; i++)
         {
@@ -195,5 +102,4 @@ public class GameTests
         //Assert
         result.Should().BeTrue();
     }
-
 }

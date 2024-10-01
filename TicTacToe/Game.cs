@@ -1,20 +1,13 @@
-﻿
-using System.Text.RegularExpressions;
-
-namespace TicTacToe;
+﻿namespace TicTacToe;
 public class Game
 {
-    private char _currentPlayer = 'X';
-    public IBoard Board { get; }
-    public char CurrentPlayer => _currentPlayer;
-    public Game()
-    {
-        Board = new Board();
-    }
+    public IBoard Board { get; init; } = new Board() { AllowedCharacters = ['X', 'O'] };
+    public char CurrentPlayer { get; private set; } = 'X';
+    public bool IsBoardFull() => Board.IsBoardFull();
 
     public void NewGame()
     {
-        _currentPlayer = 'X';
+        CurrentPlayer = 'X';
         Board.Init();
     }
 
@@ -27,35 +20,7 @@ public class Game
         ChangePlayer();
     }
 
-    public bool IsBoardFull() => Board.ToString().IndexOf(' ') < 0;
-    public bool HasAnyPlayerWon()
-    {
-        return HasPlayerWon('X') || HasPlayerWon('O');
-    }
-    public bool HasPlayerWon(char p)
-    {
-        //Rows
-        if (Regex.Match(Board.ToString(), $"^{p}{{3}}.{{6}}$").Success) 
-            return true;
-        if (Regex.Match(Board.ToString(), $"^...{p}{{3}}...$").Success) 
-            return true;
-        if (Regex.Match(Board.ToString(), $"^.{{6}}{p}{{3}}$").Success) 
-            return true;
-        //Cols
-        if (Regex.Match(Board.ToString(), $"^{p}..{p}..{p}..$").Success)
-            return true;
-        if (Regex.Match(Board.ToString(), $"^.{p}..{p}..{p}.$").Success)
-            return true;
-        if (Regex.Match(Board.ToString(), $"^..{p}..{p}..{p}$").Success)
-            return true;
-        //Diagonals
-        if (Regex.Match(Board.ToString(), $"^{p}...{p}...{p}$").Success)
-            return true;
-        if (Regex.Match(Board.ToString(), $"^..{p}.{p}.{p}..$").Success)
-            return true;
+    public bool HasAnyPlayerWon() => Board.HasPlayerWon('X') || Board.HasPlayerWon('O');
 
-        return false;
-    }
-
-    private void ChangePlayer() => _currentPlayer = CurrentPlayer == 'X' ? 'O' : 'X';
+    private void ChangePlayer() => CurrentPlayer = CurrentPlayer == 'X' ? 'O' : 'X';
 }

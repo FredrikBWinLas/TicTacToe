@@ -8,5 +8,7 @@ public interface IBoard
     void Set(int index, char player);
     string ToString();
     bool IsEmpty(int index);
+    bool IsBoardFull();
+    public bool HasPlayerWon(char player);
 }
 

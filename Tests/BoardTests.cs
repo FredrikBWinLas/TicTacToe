@@ -140,4 +140,97 @@ public class BoardTests
         result.Should().BeTrue();
     }
 
+    [Fact]
+    public void IsBoardFull_WhenBoardIsNotFull_ShouldGiveFalse()
+    {
+        //Arrange
+        var cut = new Board();
+        cut.Init();
+        cut.Set(0, 'X');
+
+        //Act
+        var result = cut.IsBoardFull();
+
+        //Assert
+        result.Should().BeFalse();
+    }
+    [Fact]
+    public void IsBoardFull_WhenBoardIsFull_ShouldGiveTrue()
+    {
+        //Arrange
+        var cut = new Board();
+        cut.Init();
+        for (var i = 0; i < 9; i++)
+            cut.Set(i, 'X');
+
+        //Act
+        var result = cut.IsBoardFull();
+
+        //Assert
+        result.Should().BeTrue();
+    }
+
+    [Theory]
+    [InlineData("XXX      ", 'X')]
+    [InlineData("   XXX   ", 'X')]
+    [InlineData("      XXX", 'X')]
+
+    [InlineData("X  X  X  ", 'X')]
+    [InlineData(" X  X  X ", 'X')]
+    [InlineData("  X  X  X", 'X')]
+
+    [InlineData("X   X   X", 'X')]
+    [InlineData("  X X X  ", 'X')]
+
+    [InlineData("OOO      ", 'O')]
+    public void HasPlayerWon_WhenWon_ShouldGiveTrue(string boardData, char player)
+    {
+        //Arrange
+        var cut = new Board();
+        cut.Init();
+        for (int i = 0; i < boardData.Length; i++)
+        {
+            cut.Set(i, boardData[i]);
+        }
+
+        //Act
+        var result = cut.HasPlayerWon(player);
+
+        //Assert
+        result.Should().BeTrue();
+    }
+
+    [Theory]
+    [InlineData("XX       ", 'X')]
+    [InlineData("   XX    ", 'X')]
+    [InlineData("      XX ", 'X')]
+
+    [InlineData("X  X     ", 'X')]
+    [InlineData(" X  X    ", 'X')]
+    [InlineData("  X  X   ", 'X')]
+
+    [InlineData("X   X    ", 'X')]
+    [InlineData("  X X    ", 'X')]
+
+    [InlineData("XOXOXOXOX", 'O')]
+    [InlineData("OXOXOXOXO", 'X')]
+
+    [InlineData("OXXOOXXOX", 'O')]
+    [InlineData("OXOXOX X ", 'O')]
+    public void HasPlayerWon_WhenNoWins_ShouldGiveFalse(string boardData, char player)
+    {
+        //Arrange
+        var cut = new Board();
+        cut.Init();
+        for (int i = 0; i < boardData.Length; i++)
+        {
+            cut.Set(i, boardData[i]);
+        }
+
+        //Act
+        var result = cut.HasPlayerWon(player);
+
+        // Assert
+        result.Should().BeFalse();
+    }
 }
